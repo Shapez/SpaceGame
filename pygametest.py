@@ -154,7 +154,8 @@ all_sprites_list.add(p1)
 
 pygame.time.set_timer(USEREVENT+1, 20)
 
-
+bgmusic = pygame.mixer.music.load('DynaudioDreams.mp3')
+pygame.mixer.music.play()
 
 done = False
 while not done:
