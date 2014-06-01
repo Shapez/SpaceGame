@@ -88,6 +88,37 @@ class Player(pygame.sprite.Sprite):
         self.pos[1] = (self.pos[1] + self.vel[1])% HEIGHT
         self.rect.center = self.pos
 
+<<<<<<< master
+=======
+class Sparkle(pygame.sprite.Sprite):
+    def __init__(self,parent):
+        pygame.sprite.Sprite.__init__(self)
+        self.pos = list(parent.pos)
+        self.vel = list(parent.vel)
+        self.image = pygame.image.load("bluesparkle.png").convert_alpha()
+        self.angle = 0
+        self.angle_vel = 0
+        self.life = 5
+        self.rect = self.image.get_rect()
+        self.image_center = self.rect.center
+    
+    
+    def update(self):
+        self.life -=1
+        self.rect.center = self.angle_vel
+
+        self.angle += self.angle_vel
+        
+        self.vel[0] += random.choice([1.0,-1.0])
+        self.vel[1] += random.choice([1.0,-1.0])
+
+        self.pos[0] = (self.pos[0] + self.vel[0]) % WIDTH
+        self.pos[1] = (self.pos[1] + self.vel[1]) % HEIGHT
+        self.rect.center = self.pos
+        
+
+        
+>>>>>>> local
         
         
 
@@ -125,6 +156,13 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+<<<<<<< master
+=======
+        if event.type == USEREVENT+1:
+            
+            for sparkle_parent in all_sprites_list:
+                sparkles.add(Sparkle(sparkle_parent))
+>>>>>>> local
         elif event.type == pygame.MOUSEBUTTONDOWN:
             click_sound.play()
     surface.blit(background,(0,0))
