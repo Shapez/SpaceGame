@@ -82,12 +82,31 @@ class Player(pygame.sprite.Sprite):
         self.vel[1] += axis1
 
         
-        self.pos[1] += self.vel[1]
+        
 
         self.pos[0] = (self.pos[0] + self.vel[0]) % WIDTH
         self.pos[1] = (self.pos[1] + self.vel[1])% HEIGHT
         self.rect.center = self.pos
 
+class Sparkle(pygame.sprite.Sprite):
+    def __init__(self,parent):
+        pygame.sprite.Sprite.__init__(self)
+        self.pos = list(parent.pos)
+        self.vel = list(parent.vel)
+        self.image = pygame.image.load("bluesparkle.png").convert_alpha()
+        self.angle = 0
+        self.angle_vel = 0
+        self.life = 5
+        self.rect = self.image.get_rect()
+        self.image_center = self.rect.center
+    
+    
+    def update(self):
+        self.life +=1
+        self.rect.center = self.pos
+        
+
+        
         
         
 
@@ -112,7 +131,7 @@ def flower_spawn(flowerlist,heaven):
 
 Flower_list = pygame.sprite.Group()
 all_sprites_list = pygame.sprite.Group()
-
+sparkles = pygame.sprite.Group()
 for i in range(300):
     flower = Flower()
     Flower_list.add(flower)
@@ -120,11 +139,19 @@ for i in range(300):
 p1 = Player([0,0],[0,0],0, joy=0)
 all_sprites_list.add(p1)
 
+pygame.time.set_timer(USEREVENT+1, 20)
+
+
+
 done = False
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+        if event.type == USEREVENT+1:
+            print "userevent"
+            for sparkle_parent in all_sprites_list:
+                sparkles.add(Sparkle(sparkle_parent))
         elif event.type == pygame.MOUSEBUTTONDOWN:
             click_sound.play()
     surface.blit(background,(0,0))
@@ -132,6 +159,8 @@ while not done:
     Flower_list.draw(surface) 
     all_sprites_list.update()
     all_sprites_list.draw(surface)
+    sparkles.update()
+    sparkles.draw(surface)
     heaven = [] 
     myfont1 = pygame.font.SysFont("monospace",80)
     label1 = myfont1.render("Score : "+str(score),1,(255,1,200))
