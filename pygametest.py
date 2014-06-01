@@ -68,9 +68,10 @@ class Player(pygame.sprite.Sprite):
     def __init__(self,pos,vel,angle, joy=None):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("flutter.png").convert_alpha()
-        self.black = pygame.Surface(self.image.get_rect(), 0, 32)
-        self.black.fill((0, 0, 0))
-        self.black = self.black.convert_alpha()
+        #self.black = pygame.Surface(self.image.get_rect(), 0, 32)
+        #self.black.fill((0, 0, 0))
+        #self.black.set_alpha(150)
+        #self.image.blit(self.black, )
         #self.image.set_colorkey(white)
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
