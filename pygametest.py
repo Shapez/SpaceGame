@@ -82,14 +82,13 @@ class Player(pygame.sprite.Sprite):
         self.vel[1] += axis1
 
         
-        self.pos[1] += self.vel[1]
+        
 
         self.pos[0] = (self.pos[0] + self.vel[0]) % WIDTH
         self.pos[1] = (self.pos[1] + self.vel[1])% HEIGHT
         self.rect.center = self.pos
 
-<<<<<<< master
-=======
+
 class Sparkle(pygame.sprite.Sprite):
     def __init__(self,parent):
         pygame.sprite.Sprite.__init__(self)
@@ -97,16 +96,14 @@ class Sparkle(pygame.sprite.Sprite):
         self.vel = list(parent.vel)
         self.image = pygame.image.load("bluesparkle.png").convert_alpha()
         self.angle = 0
-        self.angle_vel = 0
-        self.life = 5
+        self.angle_vel = 0.05
+        self.life = 25
         self.rect = self.image.get_rect()
         self.image_center = self.rect.center
     
     
     def update(self):
-        self.life -=1
-        self.rect.center = self.angle_vel
-
+        self.life -= 1
         self.angle += self.angle_vel
         
         self.vel[0] += random.choice([1.0,-1.0])
@@ -115,10 +112,14 @@ class Sparkle(pygame.sprite.Sprite):
         self.pos[0] = (self.pos[0] + self.vel[0]) % WIDTH
         self.pos[1] = (self.pos[1] + self.vel[1]) % HEIGHT
         self.rect.center = self.pos
+
+        if self.life < 1:
+            pygame.sprite.Sprite.kill(self)
+        self.angle += self.angle_vel
         
 
         
->>>>>>> local
+
         
         
 
@@ -143,7 +144,7 @@ def flower_spawn(flowerlist,heaven):
 
 Flower_list = pygame.sprite.Group()
 all_sprites_list = pygame.sprite.Group()
-
+sparkles = pygame.sprite.Group()
 for i in range(300):
     flower = Flower()
     Flower_list.add(flower)
@@ -151,18 +152,21 @@ for i in range(300):
 p1 = Player([0,0],[0,0],0, joy=0)
 all_sprites_list.add(p1)
 
+pygame.time.set_timer(USEREVENT+1, 20)
+
+
+
 done = False
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-<<<<<<< master
-=======
+
         if event.type == USEREVENT+1:
             
             for sparkle_parent in all_sprites_list:
                 sparkles.add(Sparkle(sparkle_parent))
->>>>>>> local
+
         elif event.type == pygame.MOUSEBUTTONDOWN:
             click_sound.play()
     surface.blit(background,(0,0))
@@ -170,6 +174,8 @@ while not done:
     Flower_list.draw(surface) 
     all_sprites_list.update()
     all_sprites_list.draw(surface)
+    sparkles.update()
+    sparkles.draw(surface)
     heaven = [] 
     myfont1 = pygame.font.SysFont("monospace",80)
     label1 = myfont1.render("Score : "+str(score),1,(255,1,200))
