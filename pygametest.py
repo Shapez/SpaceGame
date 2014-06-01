@@ -95,15 +95,17 @@ class Sparkle(pygame.sprite.Sprite):
         self.vel = list(parent.vel)
         self.image = pygame.image.load("bluesparkle.png").convert_alpha()
         self.angle = 0
-        self.angle_vel = 0
-        self.life = 5
+        self.angle_vel = 0.05
+        self.life = 25
         self.rect = self.image.get_rect()
         self.image_center = self.rect.center
     
     
     def update(self):
-        self.life +=1
-        self.rect.center = self.pos
+        self.life -=1
+        if self.life < 1:
+            pygame.sprite.Sprite.kill(self)
+        self.angle += self.angle_vel
         
 
         
