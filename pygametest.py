@@ -3,7 +3,7 @@ from pygame.locals import *
 import random
 import math
 
-
+pygame.joystick.init()
 box = pygame.Rect((0, 0), (50, 50))
 blue = (0,0,255)
 red = (255,0,0)
@@ -11,7 +11,7 @@ white = (255,255,255)
 black = (0,0,0)
 WIDTH = 1930
 HEIGHT = 1200
-
+joy = pygame.joystick.Joystick(0)
 
 
 class Flower(pygame.sprite.Sprite):
@@ -52,8 +52,8 @@ class Player(pygame.sprite.Sprite):
         self.angle_vel = 0
         self.image_center = self.rect.center
         if joy is not None:
+            pygame.joystick.init()
             self.joy = pygame.joystick.Joystick(joy)
-            self.joy.init()
             print self.joy.get_name()
 
     def update(self):
@@ -61,7 +61,8 @@ class Player(pygame.sprite.Sprite):
         friction = accel/20
         self.angle += self.angle_vel
         self.forward = angle_to_vector(math.radians(self.angle))
-        
+        pygame.joystick.init()
+        joy.init()
         axis0 = self.joy.get_axis(0)
         axis1 = self.joy.get_axis(1)
 
@@ -193,5 +194,6 @@ while not done:
     pygame.display.update()
     fpsClock.tick(30)
 
+joy.init()
 
 pygame.quit ()
