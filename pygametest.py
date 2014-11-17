@@ -15,6 +15,7 @@ joy = pygame.joystick.Joystick(0)
 
 
 class Flower(pygame.sprite.Sprite):
+    """Initialize Flower class."""
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -33,9 +34,11 @@ class Flower(pygame.sprite.Sprite):
             self.reset_pos()
 
 def angle_to_vector(ang):
+    """Spins the flowers around."""
     return [math.cos(ang), -math.sin(ang)]
 
 def dist(p,q):
+    """Returns distance between p and q. p and q are xy pairs."""
     return math.sqrt((p[0]-q[0])**2+(p[1]-q[1])**2)
 
 class Player(pygame.sprite.Sprite):
@@ -57,6 +60,7 @@ class Player(pygame.sprite.Sprite):
             print self.joy.get_name()
 
     def update(self):
+        """Update the position of self on canvas."""
         accel = 0.5
         friction = accel/20
         self.angle += self.angle_vel
