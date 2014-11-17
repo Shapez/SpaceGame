@@ -12,6 +12,7 @@ black = (0,0,0)
 WIDTH = 1930
 HEIGHT = 1200
 joy = pygame.joystick.Joystick(0)
+paused = False
 
 
 class Flower(pygame.sprite.Sprite):
@@ -34,8 +35,9 @@ class Flower(pygame.sprite.Sprite):
             self.reset_pos()
 
 def angle_to_vector(ang):
-    """Spins the flowers around."""
+    """Helper function that spins the flowers around."""
     return [math.cos(ang), -math.sin(ang)]
+
 
 def dist(p,q):
     """Returns distance between p and q. p and q are xy pairs."""
@@ -70,7 +72,6 @@ class Player(pygame.sprite.Sprite):
         axis0 = self.joy.get_axis(0)
         axis1 = self.joy.get_axis(1)
 
-        
 
         if (abs(axis0) > 0.1) or (abs(axis1) > 0.1):
             self.thrust = True
@@ -161,13 +162,13 @@ pygame.time.set_timer(USEREVENT+1, 20)
 
 bgmusic = pygame.mixer.music.load('DynaudioDreams.mp3')
 pygame.mixer.music.play()
+pygame.mixer.music.set_volume(0.3)
 
 done = False
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-
         if event.type == USEREVENT+1:
             
             for sparkle_parent in all_sprites_list:
@@ -176,6 +177,7 @@ while not done:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             click_sound.play()
     surface.blit(background,(0,0))
+   
     #Flower_list.update()
     Flower_list.draw(surface) 
     all_sprites_list.update()
