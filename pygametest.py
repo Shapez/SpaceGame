@@ -135,6 +135,7 @@ fpsClock = pygame.time.Clock()
 score = 0
 #Before the loop, load sounds
 click_sound = pygame.mixer.Sound("laser5.ogg")
+pause_sound = pygame.mixer.Sound("pause.wav")
 screenSize = (WIDTH,HEIGHT)
 surface = pygame.display.set_mode(screenSize)
 background = pygame.image.load("outer-space_00399584.jpg").convert()
@@ -167,6 +168,13 @@ pygame.mixer.music.set_volume(0.3)
 done = False
 while not done:
     for event in pygame.event.get():
+        if event.type == pygame.JOYBUTTONDOWN:
+            if event.button == 9:
+                pause_sound.play()
+                paused = not paused
+
+            
+
         if event.type == pygame.QUIT:
             done = True
         if event.type == USEREVENT+1:
@@ -177,7 +185,7 @@ while not done:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             click_sound.play()
     surface.blit(background,(0,0))
-   
+    if paused: continue
     #Flower_list.update()
     Flower_list.draw(surface) 
     all_sprites_list.update()
