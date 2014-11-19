@@ -101,7 +101,8 @@ class Sparkle(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.pos = list(parent.pos)
         self.vel = list(parent.vel)
-        self.image = self.image = random.choice([pygame.image.load('bluesparkle.png').convert_alpha(),pygame.image.load('pinksparkle.png').convert_alpha()])
+        self.image = random.choice([pygame.image.load('bluesparkle.png').convert_alpha(),
+            pygame.image.load('pinksparkle.png').convert_alpha(), pygame.image.load('twankle.png').convert_alpha()])
         self.angle = 0
         self.angle_vel = 0.05
         self.life = 25
