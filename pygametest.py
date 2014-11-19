@@ -21,9 +21,10 @@ class Flower(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = random.choice([pygame.image.load('flower.png').convert_alpha(),pygame.image.load('flower1.png').convert_alpha()])
-        
+        self.image.set_alpha(120)
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
+
 
     def reset_pos(self):
         self.rect.y = random.randrange(-1000, -10)
@@ -100,7 +101,7 @@ class Sparkle(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.pos = list(parent.pos)
         self.vel = list(parent.vel)
-        self.image = pygame.image.load("bluesparkle.png").convert_alpha()
+        self.image = self.image = random.choice([pygame.image.load('bluesparkle.png').convert_alpha(),pygame.image.load('pinksparkle.png').convert_alpha()])
         self.angle = 0
         self.angle_vel = 0.05
         self.life = 25
@@ -170,6 +171,10 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.JOYBUTTONDOWN:
             if event.button == 9:
+                pygame.font.init()
+                pausefont = pygame.font.SysFont("monospace", 80)
+                pauselabel = pausefont.render("Paused", 1, (255,1,200))
+                surface.blit(pauselabel,(WIDTH-202, 20))
                 pause_sound.play()
                 paused = not paused
 
