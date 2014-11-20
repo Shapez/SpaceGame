@@ -173,11 +173,15 @@ while not done:
         if event.type == pygame.JOYBUTTONDOWN:
             if event.button == 9:
                 pygame.font.init()
-                pausefont = pygame.font.SysFont("monospace", 80)
-                pauselabel = pausefont.render("Paused", 1, (255,1,200))
-                surface.blit(pauselabel,(WIDTH-202, 20))
+                pausefont = pygame.font.SysFont("monospace", 100)
+                pauselabel = pausefont.render("Paused! =]", 1, (255,1,200))
                 pause_sound.play()
                 paused = not paused
+                if paused == True:
+                    surface.fill((0,0,0))
+                    surface.blit(pauselabel,(965, 615))
+                    pygame.display.update()
+
 
             
 
