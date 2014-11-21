@@ -20,7 +20,7 @@ class Flower(pygame.sprite.Sprite):
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = random.choice([pygame.image.load('flower.png').convert_alpha(),pygame.image.load('flower1.png').convert_alpha()])
+        self.image = random.choice([pygame.image.load('flower.png').convert_alpha(),pygame.image.load('flower1.png').convert_alpha(),pygame.image.load('flower2.png').convert_alpha(), pygame.image.load('flower4.png').convert_alpha()])
         self.image.set_alpha(120)
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
