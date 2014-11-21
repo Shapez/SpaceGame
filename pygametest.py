@@ -138,6 +138,7 @@ score = 0
 #Before the loop, load sounds
 click_sound = pygame.mixer.Sound("laser5.ogg")
 pause_sound = pygame.mixer.Sound("pause.wav")
+pause_sound.set_volume(0.3)
 screenSize = (WIDTH,HEIGHT)
 surface = pygame.display.set_mode(screenSize)
 background = pygame.image.load("outer-space_00399584.jpg").convert()
