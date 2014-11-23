@@ -142,6 +142,7 @@ pause_sound.set_volume(0.3)
 screenSize = (WIDTH,HEIGHT)
 surface = pygame.display.set_mode(screenSize)
 background = pygame.image.load("outer-space_00399584.jpg").convert()
+frame = pygame.image.load("frame.png").convert()
 pygame.display.set_caption("space game")
 
 
@@ -181,6 +182,7 @@ while not done:
                 if paused == True:
                     surface.fill((0,0,0))
                     surface.blit(pauselabel,(965, 615))
+                    surface.blit(frame,(0, 0))
                     pygame.display.update()
 
 
