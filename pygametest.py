@@ -181,8 +181,8 @@ while not done:
                 paused = not paused
                 if paused == True:
                     surface.fill((0,0,0))
-                    surface.blit(pauselabel,(965, 615))
                     surface.blit(frame,(0, 0))
+                    surface.blit(pauselabel, (965, 615))
                     pygame.display.update()
 
 
