@@ -20,7 +20,8 @@ class Flower(pygame.sprite.Sprite):
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = random.choice([pygame.image.load('flower.png').convert_alpha(),pygame.image.load('flower1.png').convert_alpha(),pygame.image.load('flower2.png').convert_alpha(), pygame.image.load('flower4.png').convert_alpha()])
+        self.image = random.choice([pygame.image.load('flower.png').convert_alpha(),pygame.image.load('flower1.png').convert_alpha(),pygame.image.load('flower2.png').convert_alpha(),
+         pygame.image.load('flower4.png').convert_alpha(), pygame.image.load('flower5.png').convert_alpha()])
         self.image.set_alpha(120)
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
@@ -65,7 +66,7 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         """Update the position of self on canvas."""
         accel = 0.5
-        friction = accel/20
+        friction = accel/5
         self.angle += self.angle_vel
         self.forward = angle_to_vector(math.radians(self.angle))
         pygame.joystick.init()
@@ -208,7 +209,7 @@ while not done:
     heaven = [] 
     myfont1 = pygame.font.SysFont("monospace",80)
     label1 = myfont1.render("Score : "+str(score),1,(255,1,200))
-    surface.blit(label1,(WIDTH-600,20))
+    surface.blit(label1,(WIDTH-800,20))
     collide_list = pygame.sprite.groupcollide(Flower_list,all_sprites_list,False, False, collided = pygame.sprite.collide_mask)
     for flower in collide_list:
         score+=1
