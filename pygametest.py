@@ -144,6 +144,7 @@ screenSize = (WIDTH,HEIGHT)
 surface = pygame.display.set_mode(screenSize)
 background = pygame.image.load("outer-space_00399584.jpg").convert()
 frame = pygame.image.load("frame.png").convert()
+scoreboard = pygame.image.load("scoreboard.png").convert_alpha()
 pygame.display.set_caption("space game")
 
 
@@ -199,6 +200,7 @@ while not done:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             click_sound.play()
     surface.blit(background,(0,0))
+    surface.blit(scoreboard,(900,20))
     if paused: continue
     #Flower_list.update()
     Flower_list.draw(surface) 
@@ -207,9 +209,9 @@ while not done:
     sparkles.update()
     sparkles.draw(surface)
     heaven = [] 
-    myfont1 = pygame.font.SysFont("monospace",80)
+    myfont1 = pygame.font.SysFont("monospace",70)
     label1 = myfont1.render("Score : "+str(score),1,(255,1,200))
-    surface.blit(label1,(WIDTH-800,20))
+    surface.blit(label1,(WIDTH-740,75))
     collide_list = pygame.sprite.groupcollide(Flower_list,all_sprites_list,False, False, collided = pygame.sprite.collide_mask)
     for flower in collide_list:
         score+=1
