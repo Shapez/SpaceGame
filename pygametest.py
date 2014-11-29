@@ -33,6 +33,7 @@ class Flower(pygame.sprite.Sprite):
         self.rect.x = random.randrange(-100,WIDTH+100)
 
     def update(self):
+        """Resets flower's position if it reaches the bottom of the screen."""
         self.rect.y += 10
         if self.rect.y>1200:
             self.reset_pos()
