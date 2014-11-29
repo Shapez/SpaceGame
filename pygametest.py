@@ -28,6 +28,7 @@ class Flower(pygame.sprite.Sprite):
 
 
     def reset_pos(self):
+        """Resets flower x,y positions on screen."""
         self.rect.y = random.randrange(-1000, -10)
         self.rect.x = random.randrange(-100,WIDTH+100)
 
