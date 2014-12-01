@@ -153,6 +153,8 @@ pygame.display.set_caption("space game")
 
 
 def flower_spawn(flowerlist,heaven):
+    """ Update flower's position on canvas if it has
+    not been collided into and sent to heaven. """
     for flower in flowerlist:
         if flower not in heaven:
             flower.update()
@@ -176,6 +178,7 @@ pygame.mixer.music.set_volume(0.3)
 done = False
 while not done:
     for event in pygame.event.get():
+        """ Check for all events. """
         if event.type == pygame.JOYBUTTONDOWN:
             if event.button == 9:
                 pygame.font.init()
