@@ -205,7 +205,7 @@ while not done:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             click_sound.play()
     surface.blit(background,(0,0))
-    surface.blit(scoreboard,(900,20))
+    background.blit(scoreboard,(800,20))
     if paused: continue
     #Flower_list.update()
     Flower_list.draw(surface) 
