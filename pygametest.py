@@ -162,7 +162,7 @@ def flower_spawn(flowerlist,heaven):
 Flower_list = pygame.sprite.Group()
 all_sprites_list = pygame.sprite.Group()
 sparkles = pygame.sprite.Group()
-for i in range(300):
+for i in range(50):
     flower = Flower()
     Flower_list.add(flower)
 
